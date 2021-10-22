@@ -1,0 +1,29 @@
+name: test-ssh
+on:
+  push:
+
+jobs:
+  test-ssh:
+    name: test-ssh
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Node installation
+        id: install_node
+        uses: actions/setup-node@v2-beta
+        with:
+          node-version: '14.16.1'
+      #
+      - name: Run tests_pipeline from sarah-smartmenu-blayn-test
+        id: run_tests_pipeline
+        run: |   
+          cd ~
+          mkdir ./ssh
+          echo $SSH_SECRET >> .ssh/id_rsa
+          chmod 400 .ssh/id_rsa
+          cd ~
+          git clone git@github.com:sarah30/$TEST_REPOSITORY.git
+          cd $TEST_REPOSITORY
+          echo $GITHUB_SHA > deploy.txt
+          git commit -a -m "Automatic start testing commit $GITHUB_SHA"
+          git push
