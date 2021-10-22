@@ -18,15 +18,14 @@ jobs:
         id: run_tests_pipeline
         run: |  
           pwd
-          cd ~
-          mkdir .ssh
+          mkdir somessh
           ls -la
-          sudo touch .ssh/id_rsa
-          ls -la .ssh/
-          sudo echo $SSH_SECRET > .ssh/id_rsa
-          sudo chmod 400 .ssh/id_rsa
-          cd ~
-          git clone git@github.com:sarah30/$TEST_REPOSITORY.git
+          touch somessh/ssh_key
+          ls -la somessh/
+          echo $SSH_SECRET > somessh/ssh_key
+          chmod 400 somessh/ssh_key
+          ls -la somessh/
+          ssh-agent $(ssh-add /somessh/ssh_key; git clone git@github.com:sarah30/$TEST_REPOSITORY.git)
           cd $TEST_REPOSITORY
           echo $GITHUB_SHA > deploy.txt
           git commit -a -m "Automatic start testing commit $GITHUB_SHA"
