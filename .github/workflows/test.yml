@@ -25,7 +25,7 @@ jobs:
       - name: Run tests_pipeline from sarah-smartmenu-blayn-test
         id: run_tests_pipeline
         run: |  
-          git clone git@github.com:sarah30/ sarah-smartmenu-blayn-test.git
+          git clone git@github.com:sarah30/sarah-smartmenu-blayn-test.git
           cd  sarah-smartmenu-blayn-test
           echo $GITHUB_SHA > deploy.txt
           git add deploy.txt
