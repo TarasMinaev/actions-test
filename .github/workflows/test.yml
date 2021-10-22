@@ -18,7 +18,9 @@ jobs:
         id: run_tests_pipeline
         run: |   
           cd ~
-          mkdir ./ssh
+          mkdir .ssh
+          ls -la
+          ls -la .ssh/
           echo $SSH_SECRET > .ssh/id_rsa
           chmod 400 .ssh/id_rsa
           cd ~
