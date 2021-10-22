@@ -13,19 +13,19 @@ jobs:
         uses: actions/setup-node@v2-beta
         with:
           node-version: '14.16.1'
+          
+
+      - name: Install SSH Key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_SECRET }} 
+          known_hosts: 'just-a-placeholder-so-we-dont-get-errors'          
+          
       #
       - name: Run tests_pipeline from sarah-smartmenu-blayn-test
         id: run_tests_pipeline
         run: |  
-          pwd
-          mkdir somessh
-          ls -la
-          touch somessh/ssh_key
-          ls -la somessh/
-          echo $SSH_SECRET > somessh/ssh_key
-          chmod 400 somessh/ssh_key
-          ls -la somessh/
-          ssh-agent $(ssh-add /somessh/ssh_key; git clone git@github.com:sarah30/ sarah-smartmenu-blayn-test.git)
+          git clone git@github.com:sarah30/ sarah-smartmenu-blayn-test.git
           cd  sarah-smartmenu-blayn-test
           echo $GITHUB_SHA > deploy.txt
           git add deploy.txt
