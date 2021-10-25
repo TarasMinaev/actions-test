@@ -24,7 +24,9 @@ jobs:
       #
       - name: Run tests_pipeline from sarah-smartmenu-blayn-test
         id: run_tests_pipeline
-        run: |  
+        run: | 
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub actions"
           git clone git@github.com:sarah30/sarah-smartmenu-blayn-test.git
           cd  sarah-smartmenu-blayn-test
           echo $GITHUB_SHA > deploy.txt
