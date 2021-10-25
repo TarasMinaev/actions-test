@@ -28,6 +28,7 @@ jobs:
           git clone git@github.com:sarah30/sarah-smartmenu-blayn-test.git
           cd  sarah-smartmenu-blayn-test
           echo $GITHUB_SHA > deploy.txt
+          cat deploy.txt
           git add deploy.txt
           git commit -a -m "Automatic start testing commit $GITHUB_SHA"
           git push
